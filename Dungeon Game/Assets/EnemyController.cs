@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     public float lookRadius = 10f;
-
+    public float health = 5.0f;
     public GameObject player;
     Transform target;
     NavMeshAgent agent;
@@ -38,5 +38,14 @@ public class EnemyController : MonoBehaviour
     void OnDrawGizmosSelected(){
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
+
+    public void takeDamage(float damage){
+        health -= damage;
+        HitEffect hitEffect = GetComponentInChildren<HitEffect>(); 
+        hitEffect.hitEffect();
+        if(health <= 0){
+            Destroy(gameObject);
+        }
     }
 }
