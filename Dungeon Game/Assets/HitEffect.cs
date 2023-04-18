@@ -10,9 +10,10 @@ public class HitEffect : MonoBehaviour
     public void hitEffect(){
         mat = GetComponent<Renderer>();
         mat.material.color = redColor;
+        StartCoroutine(reverseColor());
     }
     IEnumerator reverseColor(){
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         mat.material.color = mainColor;
     }
 }
