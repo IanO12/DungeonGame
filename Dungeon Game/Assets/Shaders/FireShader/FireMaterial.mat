@@ -41,7 +41,7 @@ Material:
     - _QueueOffset: 0
     - _YStrength: 1
     m_Colors:
-    - _Color: {r: 3.509434, g: 1.978611, b: 0.4469562, a: 0}
+    - _Color: {r: 0.3944275, g: 2.039479, b: 1.893061, a: 0}
     - _Noise_Scale: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7883001435084918310

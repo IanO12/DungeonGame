@@ -3,6 +3,7 @@ Shader "Unlit/ToonShader"
     Properties
     {
         _Albedo("Albedo", Color) = (1,1,1,1)
+        _Offset("Offset", float) = 0.1
         _Shades("Shades", Range(1,20)) = 3
         _MainTex("Texture", 2D) = "white" {}
     }
@@ -35,6 +36,7 @@ Shader "Unlit/ToonShader"
 
             float4 _Albedo;
             float _Shades;
+            float _Offset;
             sampler2D _MainTex;
 
             v2f vert (appdata v)
@@ -50,7 +52,7 @@ Shader "Unlit/ToonShader"
             {
                 float cosineAngle = dot(normalize(i.worldNormal), normalize(_WorldSpaceLightPos0.xyz));
                 cosineAngle = max(cosineAngle, 0.33);
-                cosineAngle = (floor(cosineAngle * _Shades) / _Shades) + 0.1;
+                cosineAngle = (floor(cosineAngle * _Shades) / _Shades) + _Offset;
                 float4 color = _Albedo * cosineAngle;
                 return color;
             }
