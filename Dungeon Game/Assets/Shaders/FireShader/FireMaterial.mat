@@ -39,6 +39,7 @@ Material:
     - _Fire_Bottom_Offset: 2
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Width: 0.6
     - _YStrength: 1
     m_Colors:
     - _Color: {r: 0.3944275, g: 2.039479, b: 1.893061, a: 0}

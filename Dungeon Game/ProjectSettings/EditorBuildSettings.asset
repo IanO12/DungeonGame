@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScreen.unity
     guid: 318a7d3bc7e700d44b274ba406680ce5
   - enabled: 1
-    path: Assets/Scenes/StartingLevel.unity
+    path: Assets/Scenes/ComputerGraphics.unity
     guid: b5f9ccc0d43d81d4f87fc0de2d80a991
+  - enabled: 1
+    path: Assets/Scenes/Credit Screen.unity
+    guid: 46695c37882086e448f9c04757a606a3
+  - enabled: 1
+    path: Assets/Scenes/Game Over Screen.unity
+    guid: b76d0741e5f8b054bbb8a617d5253d96
+  - enabled: 1
+    path: Assets/Scenes/StartingLevel 1.unity
+    guid: 8536cf8c43b200b488ea98fc94c0ed4e
   m_configObjects: {}

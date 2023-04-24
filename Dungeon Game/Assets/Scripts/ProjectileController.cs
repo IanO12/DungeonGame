@@ -11,5 +11,10 @@ public class ProjectileController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision){
         Destroy(gameObject);
+        GameObject go = collision.collider.gameObject;
+        if(go.tag == "Player"){
+            HandleHit.Hit(go);
+            Debug.Log("HIT");
+        }
     }
 }

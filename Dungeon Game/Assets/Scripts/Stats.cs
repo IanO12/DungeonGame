@@ -10,4 +10,5 @@ public class Stats : MonoBehaviour
     public float attackSpeed;
     public float attackCooldown;
     public float range;
+    public float attackDistance;
 }

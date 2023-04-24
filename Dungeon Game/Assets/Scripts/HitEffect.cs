@@ -4,16 +4,29 @@ using UnityEngine;
 
 public class HitEffect : MonoBehaviour
 {
-    public Color mainColor;
-    public Color redColor;
+    Material mainColor;
+    public Material redColor;
     Renderer mat;
-    public void hitEffect(){
+    public AudioClip hit;
+    public AudioSource audio;
+    void Start(){
         mat = GetComponent<Renderer>();
-        mat.material.color = redColor;
-        StartCoroutine(reverseColor());
+        if(mat!=null){
+            mainColor = mat.material;
+        }
+    }
+    public void hitEffect(){
+        hitSound();
+        if(mat != null && redColor != null){
+            mat.material = redColor;
+            StartCoroutine(reverseColor());
+        }
+    }
+    public void hitSound(){
+        audio.PlayOneShot(hit);
     }
     IEnumerator reverseColor(){
         yield return new WaitForSeconds(0.2f);
-        mat.material.color = mainColor;
+        mat.material = mainColor;
     }
 }

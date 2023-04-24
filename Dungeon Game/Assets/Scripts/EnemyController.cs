@@ -13,6 +13,9 @@ public class EnemyController : MonoBehaviour
     Animator anim;
     AttackAnimation attack;
     bool isAttacking = false;
+    bool isKnockedBack = false;
+    Vector3 knockBackDir;
+    Stats stats;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         target = player.transform;
         agent = GetComponent<NavMeshAgent>();
+        stats = GetComponent<Stats>();
         RangeEnemyController ranger = GetComponent<RangeEnemyController>();
         if(ranger != null){
             lookRadius = 20f;
@@ -33,19 +37,20 @@ public class EnemyController : MonoBehaviour
         isAttacking = attack.attacking;
 
         float distance = Vector3.Distance(target.position, transform.position);    
-        if(distance <= lookRadius){
-            FaceTarget();
-            if(distance <= 3){
-                Debug.Log("ENEMY ATTACKING");
-                anim.SetBool("isMoving", false);
-                attack.Attack();
-            }   
-            else{
-                agent.SetDestination(target.position);
-                anim.SetBool("isMoving", true);
-            }
-        } 
-        
+        FaceTarget();
+        if(distance <= stats.attackDistance){
+            anim.SetBool("isMoving", false);
+            attack.Attack();
+        }   
+        else{
+            agent.SetDestination(target.position);
+            anim.SetBool("isMoving", true);
+        }
+    }
+    void FixedUpdate(){
+        if(isKnockedBack){
+            transform.position += knockBackDir * 0.1f;
+        }
     }
 
     void FaceTarget(){
@@ -59,16 +64,15 @@ public class EnemyController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, lookRadius);
     }
 
-    public void takeDamage(float damage){
-        health -= damage;
-        HitEffect[] hitEffects = GetComponentsInChildren<HitEffect>();
-        if(hitEffects != null){
-            for(int i = 0; i < hitEffects.Length; i++){
-                hitEffects[i].hitEffect();
-            }
+    public void knockBack(GameObject go){
+        if(!isKnockedBack){
+            isKnockedBack = true;
+            knockBackDir = -go.transform.forward;
+            Invoke(nameof(resetKnockBack), 0.3f);
         }
-        if(health <= 0){
-            Destroy(gameObject);
-        }
+    }
+
+    void resetKnockBack(){
+        isKnockedBack = false;
     }
 }
